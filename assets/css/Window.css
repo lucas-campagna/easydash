@@ -1,0 +1,51 @@
+:root{
+    --window-horizontal-padding: 5px;
+    --window-vertical-padding: 20px;
+}
+
+.windowHandle{
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: var(--window-vertical-padding) var(--window-horizontal-padding);
+    height: calc(100% - 2 * var(--window-vertical-padding));
+    width: calc(100% - 2 * var(--window-horizontal-padding));
+    position: relative;
+}
+
+.windowTextEditor{
+    min-height: 50px;
+}
+
+.windowDebugError{
+    background-color: lightcoral;
+    /* height: calc(100% - 2 * var(--window-vertical-padding)); */
+    /* width: calc(100% - 2 * var(--window-horizontal-padding)); */
+    padding: 5px;
+    color: whitesmoke;
+}
+
+.windowHeader{
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.windowHeaderButton{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.windowMinimizeButton{
+    background: red;
+}
+.windowMaximizeButton{
+    background: yellow;
+}
+.windowCloseButton{
+    background: lightblue;
+}
