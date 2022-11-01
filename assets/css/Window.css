@@ -1,15 +1,41 @@
 :root{
-    --window-horizontal-padding: 5px;
-    --window-vertical-padding: 20px;
+    --window-padding: 5px;
+    --window-header-height: 15px;
+    --window-footer-height: 15px;
 }
 
 .windowHandle{
     background-color: lightgray;
     border-radius: 5px;
-    padding: var(--window-vertical-padding) var(--window-horizontal-padding);
-    height: calc(100% - 2 * var(--window-vertical-padding));
-    width: calc(100% - 2 * var(--window-horizontal-padding));
+    padding: var(--window-padding);
+    height: calc(100% - 2 * var(--window-padding));
     position: relative;
+    box-shadow: black 0 0 15px -8px;
+}
+
+.windowFooter{
+    position: absolute;
+    left: var(--window-padding);
+    right: var(--window-padding);
+    bottom: var(--window-padding);
+    height: var(--window-footer-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.windowHeader{
+    position: absolute;
+    top: var(--window-padding);
+    left: var(--window-padding);
+    right: var(--window-padding);
+    height: var(--window-header-height);
+    height: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: grab;
 }
 
 .windowTextEditor{
@@ -18,34 +44,90 @@
 
 .windowDebugError{
     background-color: lightcoral;
-    /* height: calc(100% - 2 * var(--window-vertical-padding)); */
-    /* width: calc(100% - 2 * var(--window-horizontal-padding)); */
-    padding: 5px;
-    color: whitesmoke;
+    height: 100%;
+    padding: calc(2*var(--window-padding));
+    font-family: monospace;
+    font-weight: bold;
+    color: papayawhip;
+    white-space: pre-wrap;
+    margin: 0;
+    overflow: auto;
 }
 
-.windowHeader{
-    position: absolute;
-    top: 5px;
-    left: 0;
-    right: 0;
-    height: 10px;
-    display: flex;
-    justify-content: flex-end;
-}
-.windowHeaderButton{
+.windowHeaderButton,.windowFooterButton{
     width: 10px;
     height: 10px;
     border-radius: 50%;
     margin: 0 5px;
 }
 
-.windowMinimizeButton{
-    background: red;
-}
-.windowMaximizeButton{
-    background: yellow;
-}
 .windowCloseButton{
+    background: lightcoral;
+    cursor: pointer;
+}
+
+.windowCloseButton:hover{
+    box-shadow: lightcoral 0 0 4px 0px;
+}
+
+
+.windowShowEditorButton{
     background: lightblue;
+    cursor: pointer;
+}
+.windowShowDebugButton{
+    background: lightcoral;
+    cursor: pointer;
+}
+.windowShowResultButton{
+    background: lightgreen;
+    cursor: pointer;
+}
+
+.windowShowEditorButton:hover,
+.windowShowEditorButton.selected{
+    box-shadow: lightblue 0 0 4px 0px;
+}
+.windowShowDebugButton:hover,
+.windowShowDebugButton.selected{
+    box-shadow: lightcoral 0 0 4px 0px;
+}
+.windowShowResultButton:hover,
+.windowShowResultButton.selected{
+    box-shadow: lightgreen 0 0 4px 0px;
+}
+
+.windowShowEditorButton.coded,
+.windowShowEditorButton.coded.selected{
+    background: cadetblue;
+    box-shadow: cadetblue 0 0 4px 0px;
+}
+.windowShowDebugButton.error,
+.windowShowDebugButton.error.selected{
+    background: red;
+    box-shadow: red 0 0 4px 0px;
+}
+
+.windowShowResultButton.available,
+.windowShowResultButton.available.selected{
+    background: greenyellow;
+    box-shadow: greenyellow 0 0 4px 0px;
+}
+
+.windowContent{
+    position: absolute;
+    top: calc(var(--window-padding) + var(--window-header-height));
+    bottom: calc(var(--window-padding) + var(--window-footer-height));
+    left: var(--window-padding);
+    right: var(--window-padding);
+    background-color: white;
+    overflow: hidden;
+}
+
+.windowHeaderName{
+    color: black;
+    opacity: 0.3;
+    font-family: monospace;
+    margin: 0 3px;
+    font-weight: bold;
 }
