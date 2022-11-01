@@ -35,10 +35,10 @@ class Window:
         self.size = {'width':self.__default['width'],'height':self.__default['height']}
         self.__build()
 
-    def __del__(self):
-        path = f'{self.__windows_dir}/{self.name.replace(" ","_")}'
-        if exists(path):
-            rmtree(path)
+    # def __del__(self):
+    #     path = f'{self.__windows_dir}/{self.name.replace(" ","_")}'
+    #     if exists(path):
+    #         rmtree(path)
 
     def update(self):
         self.__build()
@@ -175,23 +175,23 @@ class Window:
             html.Div(id={'type':'window-btn-result','index':win.name},className='windowFooterButton windowShowResultButton ' + ('available' if win.layout else '') + (' selected' if win.view == 'result' else '')),
         ]
 
-    def save(self):
-        path = f'{self.__windows_dir}/{self.name.replace(" ","_")}'
-        if not exists(path):
-            mkdir(path)
-        with open(f'{path}/code.py','w') as fp:
-            fp.write(self.code)
-        dump(self,f'{path}/state.ckp')
+    # def save(self):
+    #     path = f'{self.__windows_dir}/{self.name.replace(" ","_")}'
+    #     if not exists(path):
+    #         mkdir(path)
+    #     with open(f'{path}/code.py','w') as fp:
+    #         fp.write(self.code)
+    #     dump(self,f'{path}/state.ckp')
 
-    def load(self):
-        fname = f'{self.__windows_dir}/{self.name.replace(" ","_")}/state.ckp'
-        if exists(fname):
-            win = load(fname)
-            self.position = win.position
-            self.code = win.code
-            self.size = win.size
-            self.view = win.view
-            self.error = win.error
+    # def load(self):
+    #     fname = f'{self.__windows_dir}/{self.name.replace(" ","_")}/state.ckp'
+    #     if exists(fname):
+    #         win = load(fname)
+    #         self.position = win.position
+    #         self.code = win.code
+    #         self.size = win.size
+    #         self.view = win.view
+    #         self.error = win.error
 
 @callback(
     Output({'type':'window-text-editor','index':MATCH},'value'),
@@ -223,22 +223,22 @@ def window_text_ernd_size(size):
     win.size = size
     return size
 
-@callback(
-    Output('store-selected-window-name','data'),
-    Input({'type':'window-text-editor','index':ALL},'value'),
-    Input({'type':'window-rnd','index':ALL},'position'),
-    Input({'type':'window-rnd','index':ALL},'size'),
-    Input({'type':'window-content','index':ALL},'n_clicks'),
-    Input({'type':'window-header','index':ALL},'n_clicks'),
-    Input({'type':'window-footer','index':ALL},'n_clicks'),
-    prevent_initial_call=True,
-)
-def store_selected_window_name_data(value, position, size, n_clicks_content,n_clicks_header,n_clicks_footer):
-    if ctx.triggered_id:
-        Window.selected_window_name = ctx.triggered_id['index']
-    # else:
-    #     print(ctx.triggered_id)
-    return Window.selected_window_name
+# @callback(
+#     Output('store-selected-window-name','data'),
+#     Input({'type':'window-text-editor','index':ALL},'value'),
+#     Input({'type':'window-rnd','index':ALL},'position'),
+#     Input({'type':'window-rnd','index':ALL},'size'),
+#     Input({'type':'window-content','index':ALL},'n_clicks'),
+#     Input({'type':'window-header','index':ALL},'n_clicks'),
+#     Input({'type':'window-footer','index':ALL},'n_clicks'),
+#     prevent_initial_call=True,
+# )
+# def store_selected_window_name_data(value, position, size, n_clicks_content,n_clicks_header,n_clicks_footer):
+#     if ctx.triggered_id:
+#         Window.selected_window_name = ctx.triggered_id['index']
+#     # else:
+#     #     print(ctx.triggered_id)
+#     return Window.selected_window_name
 
 @callback(
     Output({'type':'window-footer','index':MATCH},'children'),
@@ -254,7 +254,7 @@ def window_content_children(b1,b2,b3):
     else:
         win = Window.get(ctx.triggered_id['index'])
         win.view = ctx.triggered_id['type'].split('-')[-1]
-    win.save()
+    # win.save()
     return Window.build_foot_buttons(win), Window.build_content(win)
 
 if __name__ == '__main__':

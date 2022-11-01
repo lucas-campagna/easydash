@@ -39,14 +39,14 @@ def swap_dev_button_children(_):
     Input('add-window-button','n_clicks'),
     Input('store-selected-window-name','data'),
     Input({'type':'window-close-button','index':ALL},'n_clicks'),
-    prevent_initial_call=False
+    prevent_initial_call=True
 )
 def workspace_children(btn1,btn2,selected_window_name,n_clicks):
     # print('workspace_children',ctx.triggered_id,type(ctx.triggered_id))
-    if ctx.triggered_id is None:
-        for name, window in Window.get().items():
-            window.load()
-        return [window() for window in Window.get().values()]
+    # if ctx.triggered_id is None:
+    #     for name, window in Window.get().items():
+            # window.load()
+        # return [window() for window in Window.get().values()]
     if ctx.triggered_id == 'add-window-button':
         Window.add()
     elif not type(ctx.triggered_id) == str and ctx.triggered_id['type'] == 'window-close-button':
