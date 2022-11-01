@@ -1,7 +1,7 @@
 import dash
 from dash import html, dcc, Input, State, Output, ctx, ALL
 from components import Window
-from config import DEV, window_default
+from config import window_default
 from factory_component import Rnd, TextEditor
 
 app = dash.Dash(__name__)
@@ -17,7 +17,8 @@ app.layout = html.Div([
             ],
             id='dev-menu',
             className='devMenu'
-        )
+        ),
+        dcc.Store(id='store-selected-window-name')
     ],
     id='app',
 )
@@ -25,25 +26,36 @@ app.layout = html.Div([
 @app.callback(
     Output('swap-dev-button','children'),
     Input('swap-dev-button','n_clicks'),
+    prevent_initial_call=True
 )
 def swap_dev_button_children(_):
-    global DEV
-    DEV = not DEV
-    return '▶️' if DEV else '⏸'
+    global Window
+    Window.DEV = not Window.DEV
+    return '▶' if Window.DEV else '||'
 
 @app.callback(
     Output('workspace','children'),
     Input('swap-dev-button','children'),
     Input('add-window-button','n_clicks'),
-    prevent_initial_call=True
+    Input('store-selected-window-name','data'),
+    Input({'type':'window-close-button','index':ALL},'n_clicks'),
+    prevent_initial_call=False
 )
-def workspace_children(btn1,btn2):
-    global DEV
-    print('Chamou ',ctx.triggered_id)
+def workspace_children(btn1,btn2,selected_window_name,n_clicks):
+    # print('workspace_children',ctx.triggered_id,type(ctx.triggered_id))
+    if ctx.triggered_id is None:
+        for name, window in Window.get().items():
+            window.load()
+        return [window() for window in Window.get().values()]
     if ctx.triggered_id == 'add-window-button':
         Window.add()
-        print('Criou')
-    return [w(dev=DEV) for w in Window.get().values()]
+    elif not type(ctx.triggered_id) == str and ctx.triggered_id['type'] == 'window-close-button':
+        # print('Removing ',ctx.triggered_id['index'])
+        Window.rm(ctx.triggered_id['index'])
+    # print('Window.selected_window_name',Window.selected_window_name)
+    if Window.selected_window_name:
+        return [window() for name,window in Window.get().items() if name != Window.selected_window_name] + [Window.get(Window.selected_window_name)()]
+    return [window() for window in Window.get().values()]
 
 if __name__ == '__main__':
     app.run(debug=True)
