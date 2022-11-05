@@ -12,7 +12,7 @@ app.layout = html.Div([
             className='workspace'
         ),
         html.Div([
-                html.Button(
+                html.Div(
                     html.Img(
                         src='/assets/img/play.png',
                         className='controllerWindowButtonsImg',
@@ -21,7 +21,7 @@ app.layout = html.Div([
                     className='controllerWindowButtons',
                     id='swap-dev-button'
                 ),
-                html.Button(
+                html.Div(
                     html.Img(
                         src='/assets/img/plus.png',
                         className='controllerWindowButtonsImg',
@@ -41,7 +41,6 @@ app.layout = html.Div([
 @app.callback(
     Output('swap-dev-button-img','src'),
     Input('swap-dev-button','n_clicks'),
-    prevent_initial_call=True
 )
 def swap_dev_button_children(_):
     global Window
