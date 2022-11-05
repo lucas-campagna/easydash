@@ -1,5 +1,5 @@
 from factory_component import Rnd, TextEditor
-from config import DEV, window_default,dragGrid, resizeGrid, default_debug_msg
+from src.config import DEV, window_default,dragGrid, resizeGrid, default_debug_msg
 from dash import dcc, html, Input, Output, callback, MATCH, ALL, ctx, no_update
 import dash
 from os import mkdir, rmdir
@@ -236,8 +236,6 @@ def window_text_ernd_size(size):
 # def store_selected_window_name_data(value, position, size, n_clicks_content,n_clicks_header,n_clicks_footer):
 #     if ctx.triggered_id:
 #         Window.selected_window_name = ctx.triggered_id['index']
-#     # else:
-#     #     print(ctx.triggered_id)
 #     return Window.selected_window_name
 
 @callback(

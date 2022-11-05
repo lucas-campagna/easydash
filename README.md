@@ -9,4 +9,4 @@ Our aim is to develop a window-based system built with [Dash](https://plotly.com
 
 ## Some results
 
-![example](assets/img/example.png)
+![example](src/assets/img/example.png)

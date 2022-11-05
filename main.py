@@ -1,10 +1,10 @@
 import dash
 from dash import html, dcc, Input, State, Output, ctx, ALL
-from components import Window
-from config import window_default
+from src.components import Window
+from src.config import window_default
 from factory_component import Rnd, TextEditor
 
-app = dash.Dash(__name__)
+app = dash.Dash(__name__,assets_folder='src/assets')
 
 app.layout = html.Div([
         html.Div(
