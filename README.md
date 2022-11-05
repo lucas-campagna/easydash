@@ -2,8 +2,6 @@
 
 Less html/css more display/results.
 
-This is the idea behind ths project.
-
 Our aim is to develop a window-based system built with [Dash](https://plotly.com/dash/) for you develop dashboards __easily__ with [Dash](https://plotly.com/dash/).
 
 
@@ -25,15 +23,15 @@ python main.py
 
 ## Going Futher
 
-- Create large components on files and import in the `main.py`
-- Create callbacks on files and import in the `main.py`
+- Create large components in files and import into `main.py`
+- Create callbacks in files and import into `main.py`
 
 ## Future Features
 
-- Implement page controler, so you can create slides like or different dash
-- We are working on a way to implement callbacks in the windows
-- Enhance visual
+- Implement page controller, so you can create dashs like slides or different dash on each page
+- We are working on a way to implement callbacks in windows
+- Visual enhancement
 
 ## Contributions
 
-Make part of it, help us to help everybody to build dashboard in a simple way.
+Be part of it, help us help everyone build dashboards in a simple way
