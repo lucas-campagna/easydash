@@ -1,5 +1,8 @@
 .devMenu{
     position: fixed;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
 }
 
 .workspace{
@@ -8,4 +11,15 @@
     right: 0;
     top: 0;
     bottom: 0;
+}
+
+.controllerWindowButtonsImg{
+    max-width: 16px;
+    max-height: 16px;
+}
+
+.controllerWindowButtons{
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
 }

@@ -12,8 +12,23 @@ app.layout = html.Div([
             className='workspace'
         ),
         html.Div([
-                html.Button('▶',id='swap-dev-button'),
-                html.Button('+',id='add-window-button'),
+                html.Button(
+                    html.Img(
+                        src='/assets/img/play.png',
+                        className='controllerWindowButtonsImg',
+                        id='swap-dev-button-img'
+                    ),
+                    className='controllerWindowButtons',
+                    id='swap-dev-button'
+                ),
+                html.Button(
+                    html.Img(
+                        src='/assets/img/plus.png',
+                        className='controllerWindowButtonsImg',
+                    ),
+                    className='controllerWindowButtons',
+                    id='add-window-button'
+                ),
             ],
             id='dev-menu',
             className='devMenu'
@@ -24,18 +39,18 @@ app.layout = html.Div([
 )
 
 @app.callback(
-    Output('swap-dev-button','children'),
+    Output('swap-dev-button-img','src'),
     Input('swap-dev-button','n_clicks'),
     prevent_initial_call=True
 )
 def swap_dev_button_children(_):
     global Window
     Window.DEV = not Window.DEV
-    return '▶' if Window.DEV else '||'
+    return '/assets/img/play.png' if Window.DEV else '/assets/img/pause.png'
 
 @app.callback(
     Output('workspace','children'),
-    Input('swap-dev-button','children'),
+    Input('swap-dev-button','n_clicks'),
     Input('add-window-button','n_clicks'),
     Input('store-selected-window-name','data'),
     Input({'type':'window-close-button','index':ALL},'n_clicks'),
